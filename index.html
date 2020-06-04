@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title> TEST DOTQ</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js">
+ </script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ <link rel="stylesheet" href="app.css"/>
+</head>
+
+<body>
+ <div class="container">
+	<a href="https://vuejs.org/v2/guide/"><img src="https://i2.wp.com/softwareengineeringdaily.com/wp-content/uploads/2015/12/vuejs.jpg?fit=720%2C260&ssl=1"/></a>
+    <div id="tasks"> 
+      <div>
+        <h2 v-show="chuadones.length">List nhiệm vụ mới({{chuadones.length}})</h2>
+        <ul class="list-group">
+            <li v-for="task in chuadones" class="list-group-item">
+                <span @dblclick="editTask(task)">{{task.body}}</span>
+                <button @click="removeTask(task)">X</button>
+                <button @click="hoanthanhTask(task)">✔</button>
+            </li>
+        </ul>
+      </div>	  
+	  <br>
+      <form @submit="addTask">
+        <div class="form-group">
+            <input
+			ref="taskmoi"
+			v-model="newTask"
+			placeholder="input tên nhiệm vụ mới..."
+			/>
+			<i v-if="newTask != ''"> Sẽ add thêm nhiệm vụ mới = {{newTask}}</i>
+        </div>
+        <button class="btn btn-primary" type="submit">Thêm nhiệm vụ</button>
+        <button v-show="chuadones.length" class="btn btn-danger" @click="hoanthanhAll">Done all nhiệm vụ</button>
+      </form>
+	  <br>
+      <div v-show="dadones.length">
+        <h2>List nhiệm vụ đã xong({{dadones.length}})</h2>
+        <ul class="list-group">
+            <li v-for="task in dadones" class="list-group-item">
+                <span><i>{{task.body}}</i></span>
+                <button @click="removeTask(task)">X</button>
+                <button @click="change2NotDoneTask(task)">Chưa xong</button>
+            </li>
+            <div>
+				<button @click="removeAllDone">Xóa all nhiệm vụ đã xong</button>
+			</div>
+        </ul>
+      </div>	  
+	  <hr/>
+	  <pre>{{$data | json}}</pre>
+    </div>	  
+ </div>
+ <script src="app.js"></script>
+</body>
+</html>
