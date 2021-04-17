@@ -13,39 +13,39 @@
 	<a href="https://vuejs.org/v2/guide/"><img src="https://i2.wp.com/softwareengineeringdaily.com/wp-content/uploads/2015/12/vuejs.jpg?fit=720%2C260&ssl=1"/></a>
     <div id="tasks"> 
       <div>
-        <h2 v-show="chuadones.length">List nhiệm vụ mới({{chuadones.length}})</h2>
+        <h2 v-show="onCompNotYet.length">List nhiệm vụ mới({{onCompNotYet.length}})</h2>
         <ul class="list-group">
-            <li v-for="task in chuadones" class="list-group-item">
-                <span @dblclick="editTask(task)">{{task.body}}</span>
-                <button @click="removeTask(task)">X</button>
-                <button @click="hoanthanhTask(task)">✔</button>
+            <li v-for="task in onCompNotYet" class="list-group-item">
+                <span @dblclick="onEditTask(task)">{{task.body}}</span>
+                <button @click="onRemoveTask(task)">X</button>
+                <button @click="onHoanThanhTask(task)">✔</button>
             </li>
         </ul>
       </div>	  
 	  <br>
-      <form @submit="addTask">
+      <form @submit="onAddTask">
         <div class="form-group">
             <input
 			ref="taskmoi"
-			v-model="newTask"
+			v-model="vueNewTask"
 			placeholder="input tên nhiệm vụ mới..."
 			/>
-			<i v-if="newTask != ''"> Sẽ add thêm nhiệm vụ mới = {{newTask}}</i>
+			<i v-if="vueNewTask != ''"> Sẽ add thêm nhiệm vụ mới = {{vueNewTask}}</i>
         </div>
         <button class="btn btn-primary" type="submit">Thêm nhiệm vụ</button>
-        <button v-show="chuadones.length" class="btn btn-danger" @click="hoanthanhAll">Done all nhiệm vụ</button>
+        <button v-show="onCompNotYet.length" class="btn btn-danger" @click="onHoanThanhAll">Done all nhiệm vụ</button>
       </form>
 	  <br>
-      <div v-show="dadones.length">
-        <h2>List nhiệm vụ đã xong({{dadones.length}})</h2>
+      <div v-show="onCompDone.length">
+        <h2>List nhiệm vụ đã xong({{onCompDone.length}})</h2>
         <ul class="list-group">
-            <li v-for="task in dadones" class="list-group-item">
+            <li v-for="task in onCompDone" class="list-group-item">
                 <span><i>{{task.body}}</i></span>
-                <button @click="removeTask(task)">X</button>
-                <button @click="change2NotDoneTask(task)">Chưa xong</button>
+                <button @click="onRemoveTask(task)">X</button>
+                <button @click="onChange2NotDoneTask(task)">Chưa xong</button>
             </li>
             <div>
-				<button @click="removeAllDone">Xóa all nhiệm vụ đã xong</button>
+				<button @click="onRemoveAllDone">Xóa all nhiệm vụ đã xong</button>
 			</div>
         </ul>
       </div>	  
